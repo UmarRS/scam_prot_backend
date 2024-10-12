@@ -1,11 +1,9 @@
-// models/Voting.js
-
 const mongoose = require("mongoose");
 
 const votingSchema = new mongoose.Schema({
   siteurl: { type: String, required: true },
   company: { type: String, required: true },
-  description: String,
+  description: { type: String, maxLength: 500 },
   currentvotes: { type: Number, default: 0 },
 });
 
