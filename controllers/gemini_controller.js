@@ -4,7 +4,6 @@ async function handler(req, res) {
   if (req.method === "POST") {
     const { messageHistory } = req.body;
 
-    // Dynamically import the GoogleGenerativeAI class
     const { GoogleGenerativeAI } = await import("@google/generative-ai");
 
     const genAI = new GoogleGenerativeAI(apiKey);

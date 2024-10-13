@@ -2,8 +2,7 @@
 
 const Voting = require("../models/voting");
 const Site = require("../models/site");
-// Get all voting entries
-// Get all voting entries
+//get all votes
 exports.getVotings = async (req, res) => {
   try {
     const votings = await Voting.find();
@@ -13,7 +12,7 @@ exports.getVotings = async (req, res) => {
   }
 };
 
-// Upvote a website
+//website upvote
 exports.upvoteWebsite = async (req, res) => {
   const { id } = req.body;
 
@@ -24,31 +23,26 @@ exports.upvoteWebsite = async (req, res) => {
       return res.status(404).json({ message: "Website not found" });
     }
 
-    // Increment votes
+    //add 1 to votes
     website.currentvotes += 1;
 
-    // Check if the website has reached 15 votes
     if (website.currentvotes >= 15) {
-      // Add the URL to the sites collection
+      //if 15 add to collection
       const existingSite = await Site.findOne();
 
       if (existingSite) {
-        // Add to the existing site's array of URLs
         existingSite.sites.push(website.siteurl);
         await existingSite.save();
       } else {
-        // Create a new document if none exists
         const newSite = new Site({
           sites: [website.siteurl],
         });
         await newSite.save();
       }
 
-      // Remove the website from votings collection
       await Voting.findByIdAndDelete(id);
       res.status(200).json({ message: "Website moved to sites collection" });
     } else {
-      // Save the updated votes
       await website.save();
       res.status(200).json({ message: "Upvoted successfully" });
     }
@@ -57,7 +51,7 @@ exports.upvoteWebsite = async (req, res) => {
   }
 };
 
-// Create new voting entry
+//new
 exports.createWebsite = async (req, res) => {
   const { siteurl, company, description } = req.body;
 

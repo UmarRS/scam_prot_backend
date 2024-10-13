@@ -1,8 +1,6 @@
-// controllers/siteController.js
-
 const Site = require("../models/site");
 
-// Get all sites
+//all site fetch
 exports.getSites = async (req, res) => {
   try {
     const sites = await Site.find();
@@ -12,7 +10,7 @@ exports.getSites = async (req, res) => {
   }
 };
 
-// Create new site
+//make new site
 exports.createSite = async (req, res) => {
   const site = new Site({
     sites: req.body.sites,
