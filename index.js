@@ -13,10 +13,12 @@ app.use(cors());
 // Import Routes
 const siteRoutes = require("./routes/site_routes");
 const votingRoutes = require("./routes/voting_routes");
+const geminiRoutes = require("./routes/gemini_routes");
 
 // Use Routes
 app.use("/api/sites", siteRoutes);
 app.use("/api/voting", votingRoutes);
+app.use("/api/gemini", geminiRoutes);
 
 // Connect to MongoDB
 mongoose
