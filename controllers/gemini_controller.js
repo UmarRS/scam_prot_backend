@@ -1,4 +1,6 @@
-const apiKey = "AIzaSyC_Swpy1eDGo9_7HCHsPzC9DKLv6-L_Tfw";
+require("dotenv").config();
+
+const apiKey = process.env.GEMINI_API_KEY;
 
 async function handler(req, res) {
   if (req.method === "POST") {

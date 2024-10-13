@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 var cors = require("cors");
@@ -19,13 +20,10 @@ app.use("/api/gemini", geminiRoutes);
 
 //MONGODB STUFF
 mongoose
-  .connect(
-    "mongodb+srv://umarsyed:njqqiEqhfVkp4rz9@scamprotection.xa7xv.mongodb.net/?retryWrites=true&w=majority&appName=scamprotection",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     console.log("Connected to MongoDB");
     app.listen(5001, () => console.log("Server running on port 5001"));
